@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module my_functions</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">my_functions</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:e%3A%5Codrive%5Cgoogle%20drive%5Ccollege%5Cwalsh%5Cit-414%5Cweek%202%5Cweek_02_reading_and_writing_files%5Cfunctions%5Cmy_functions.py">e:\odrive\google drive\college\walsh\it-414\week 2\week_02_reading_and_writing_files\functions\my_functions.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"><a href="platform.html">platform</a><br>
+</td><td class="multicolumn"><a href="shutil.html">shutil</a><br>
+</td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-copy_file"><strong>copy_file</strong></a>(file, file_path_from, file_path_to, is_subfile=False)</dt><dd><span class="code">Copies&nbsp;a&nbsp;file&nbsp;from&nbsp;one&nbsp;folder&nbsp;to&nbsp;another&nbsp;while&nbsp;ensuring&nbsp;the&nbsp;file&nbsp;isn't&nbsp;larger&nbsp;than&nbsp;a&nbsp;GB&nbsp;and&nbsp;skips&nbsp;files<br>
+Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;[string]&nbsp;--&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file_path_from&nbsp;[string]&nbsp;--&nbsp;the&nbsp;full&nbsp;path&nbsp;to&nbsp;the&nbsp;file&nbsp;being&nbsp;copied&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file_path_to&nbsp;[string]&nbsp;--&nbsp;the&nbsp;full&nbsp;path&nbsp;to&nbsp;the&nbsp;file&nbsp;being&nbsp;copied&nbsp;to</span></dd></dl>
+ <dl><dt><a name="-get_folder_path"><strong>get_folder_path</strong></a>(path_type)</dt><dd><span class="code">Obtains&nbsp;the&nbsp;data&nbsp;and&nbsp;verifies&nbsp;it<br>
+Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path_type&nbsp;[string]&nbsp;--&nbsp;the&nbsp;type&nbsp;of&nbsp;path&nbsp;to&nbsp;get<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;[string]&nbsp;--&nbsp;the&nbsp;verified&nbsp;path</span></dd></dl>
+ <dl><dt><a name="-get_root"><strong>get_root</strong></a>()</dt><dd><span class="code">Returns&nbsp;the&nbsp;correct&nbsp;path&nbsp;depending&nbsp;on&nbsp;the&nbsp;operating&nbsp;system<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;[string]&nbsp;--&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;path&nbsp;depending&nbsp;on&nbsp;the&nbsp;OS</span></dd></dl>
+ <dl><dt><a name="-is_valid_path"><strong>is_valid_path</strong></a>(path)</dt><dd><span class="code">Checks&nbsp;if&nbsp;the&nbsp;path&nbsp;is&nbsp;valid&nbsp;and&nbsp;has&nbsp;files&nbsp;it&nbsp;it<br>
+Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;[string]&nbsp;--&nbsp;the&nbsp;path&nbsp;to&nbsp;be&nbsp;checked<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;true/false&nbsp;[boolean]&nbsp;--&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;path&nbsp;is&nbsp;valid&nbsp;or&nbsp;not</span></dd></dl>
+ <dl><dt><a name="-path_empty"><strong>path_empty</strong></a>(path)</dt><dd><span class="code">Returns&nbsp;whether&nbsp;the&nbsp;path&nbsp;is&nbsp;empty&nbsp;or&nbsp;not<br>
+Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;[string]&nbsp;--&nbsp;the&nbsp;path&nbsp;to&nbsp;be&nbsp;checked<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;true/false&nbsp;[boolean]&nbsp;--&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;path&nbsp;is&nbsp;empty&nbsp;or&nbsp;not</span></dd></dl>
+ <dl><dt><a name="-process_files"><strong>process_files</strong></a>(path_from, path_to)</dt><dd><span class="code">Processes&nbsp;all&nbsp;files&nbsp;in&nbsp;a&nbsp;directory&nbsp;under&nbsp;1GB<br>
+Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path_from&nbsp;[string]&nbsp;--&nbsp;the&nbsp;path&nbsp;where&nbsp;the&nbsp;files&nbsp;will&nbsp;be&nbsp;copied&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path_to&nbsp;[string]&nbsp;--&nbsp;the&nbsp;path&nbsp;where&nbsp;the&nbsp;files&nbsp;will&nbsp;be&nbsp;copied&nbsp;to</span></dd></dl>
+ <dl><dt><a name="-write_log"><strong>write_log</strong></a>(path, text)</dt><dd><span class="code">Writes&nbsp;to&nbsp;the&nbsp;log&nbsp;file<br>
+Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;[string]&nbsp;--&nbsp;where&nbsp;the&nbsp;log&nbsp;file&nbsp;will&nbsp;be&nbsp;written<br>
+&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;[string]&nbsp;--&nbsp;the&nbsp;message&nbsp;to&nbsp;be&nbsp;written&nbsp;in&nbsp;the&nbsp;log&nbsp;file</span></dd></dl>
+</td></tr></table>
+</body></html>
