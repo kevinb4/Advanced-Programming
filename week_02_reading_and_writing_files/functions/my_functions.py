@@ -60,7 +60,7 @@ def get_folder_path(path_type):
 def get_root():
     """Returns the correct path depending on the operating system
     Returns:
-        path [string] -- the start of the path depending on the OS"""
+        root [string] -- the start of the path depending on the OS"""
     root = ""
 
     if platform.system() == "Windows":
