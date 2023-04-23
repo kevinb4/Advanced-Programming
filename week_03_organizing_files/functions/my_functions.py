@@ -41,7 +41,7 @@ def find_ips(path):
             lines = file.readlines() # read all file lines into a list
             for line in lines:
                 if re.search(r"(\.\.\/)|(\/wp-login\.php\?action=register)|(403 HTTP)|(install)|(select)", line):
-                    ip = re.search(r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", line).group(0) # grab the source ip from the line
+                    ip = re.search(r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", line).group(0) # grab the source ip (first ip listed via the group) from the line
 
                     if ip not in entries: # no duplicate ips (it makes sense if the same ip is found on different sites however)
                         entries.append(ip)
@@ -80,7 +80,9 @@ def process_logs(path):
 def unzip_file(file, path):
     """Unzips a file
     Arguments:
-        file [string] -- the file to be unzipped"""
+        file [string] -- the file to be unzipped
+    Returns:
+        true/false [bool] -- whether the file was unzipped successfully or not"""
     if not os.path.isfile(file):
         print("The zip file was not found, aborting...")
         return False
@@ -105,7 +107,7 @@ def write_log(path, text):
         log.write(f"{text}\n")
 
 def zip_logs(path):
-    """Zips the log files then moves the zip to the running directory
+    """Zips the log files in the running directory text_files folder
     Arguments:
         path [string] -- the path of the folder containing the log files"""
     if not os.path.isdir(path):
