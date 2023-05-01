@@ -57,6 +57,12 @@ browser.test_valid_element(phone, submit, "1234567890", "valid_phone")
 # test valid phone with dashes
 browser.test_valid_element(phone, submit, "123-456-7890", "valid_phone_dashes")
 
+# test valid phone with dots
+browser.test_valid_element(phone, submit, "123.456.7890", "valid_phone_dots")
+
+# test valid phone with spaces
+browser.test_valid_element(phone, submit, "123 456 7890", "valid_phone_spaces")
+
 # test valid submission
 first_name.send_keys("John")
 last_name.send_keys("Smith")
