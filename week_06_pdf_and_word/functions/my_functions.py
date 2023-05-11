@@ -48,9 +48,36 @@ def load_pdf_data(path):
     pdf = open(path, "rb")
     pdf_reader = PyPDF4.PdfFileReader(pdf)
 
-    # since there is only one page for this assignment, only return the first page
-    # and remove all the random line breaks to make it easier to read
-    return pdf_reader.getPage(0).extractText().replace("\n", "")
+    # split the text by the period and new line
+    split_text = pdf_reader.getPage(0).extractText().strip().split(".\n \n")
+    patched_text = ""
+
+    for text in range(len(split_text)): # loop through the split array to disect what we need and shove it back in
+        item = split_text.pop(0)
+
+        if "!\n \n" in item: # find the ! since one of the paragraphs ends with it
+            lines = item.split("!\n \n")
+            length = len(lines)
+            for line in range(length): # loop through the new split
+                final = ""
+                # give all but the last line a ! since it was split on that
+                if line == length - 1:
+                    lines[line] += "."
+                else:
+                    lines[line] += "!"
+
+            final = ""
+            for line in lines: # loop through everything to remove the random line breaks and add two for the new paragraph
+                final += line.replace("\n", "") + "\n\n"
+            patched_text += final
+
+            # could also check for ? as well, but since the current doc doesn't have it, I will leave it as is
+        else:
+            # the original split just needs to have the random line breaks removed and a period added with two new lines
+            patched_text += item.replace("\n", "") + ".\n\n"
+
+    # remove the last two new lines and the extra period
+    return patched_text[:-3]
 
 def load_word_data(path):
     """Load the word data from the specified path
