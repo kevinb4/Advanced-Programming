@@ -8,16 +8,19 @@ def alert_check(config):
     """Returns all of the data checked for alerts
     Arguments:
         config [dict] -- the config file"""
-    alerts = []
+    alerts = {}
 
+    cpu = psutil.cpu_percent()
     # when a CPU core is over 85%
-    if psutil.cpu_percent() > 85:
-        alerts.append("cpu")
+    if cpu > 85:
+        alerts["cpu"] = cpu
 
+    ram = psutil.virtual_memory().percent
     # when memory usage is over 90%
-    if psutil.virtual_memory().percent > 90:
-        alerts.append("ram")
+    if ram > 90:
+        alerts["ram"] = ram
     
+    volumes = []
     # when a disk usage on a volune is over 70%
     for volume in psutil.disk_partitions():
         # check if volume is ready/available (empty disk drives such as cd/dvd/blueray will cause errors without this check)
@@ -25,12 +28,19 @@ def alert_check(config):
             continue
 
         if psutil.disk_usage(volume[1]).percent > 70:
-            alerts.append("disk")
-            break # just one alert is needed
+            volumes.append({ "name": volume.device, "percent": psutil.disk_usage(volume[1]).percent })
 
+    if len(volumes) > 0:
+        alerts["disk"] = volumes
+
+    errin = psutil.net_io_counters().errin
+    errout = psutil.net_io_counters().errout
     # when errors and dropped packets are appearing on the network
-    if psutil.net_io_counters().errin + psutil.net_io_counters().errout > 0:
-        alerts.append("network")
+    if errin > 0:
+        alerts["network_in"] = errin
+
+    if errout > 0:
+        alerts["network_out"] = errout
 
     # handle the alerts if there are any
     if len(alerts) > 0:
@@ -124,23 +134,26 @@ def handle_alerts(alerts, config):
         # convert the last sent time to a datetime object
         last_sent = datetime.strptime(config['last_text'], '%B %d, %Y %H:%M:%S')
 
-        # if the last text was sent less than 1 minute ago, don't send another text
-        if (datetime.now() - last_sent).seconds < 60:
-            print(f"Text was not sent because it was sent less than 1 minute ago")
+        # if the last text was sent less than 1 hour ago, don't send another text
+        if (datetime.now() - last_sent).seconds < 3600:
+            print(f"Text was not sent because it was sent less than 1 hour ago")
             return
     except:
         pass # this means it's the first time sending, so it's fine to keep going
 
     message = "ALERT!"
-    for alert in alerts:
-        if alert == "cpu":
-            message += f"\n{time} - CPU is over 85%"
-        elif alert == "ram":
-            message += f"\n{time} - RAM is over 90%"
-        elif alert == "disk":
-            message += f"\n{time} - Disk usage is over 70%"
-        elif alert == "network":
-            message += f"\n{time} - Network errors and dropped packets are appearing"
+    for key, value in alerts.items():
+        if key == "cpu":
+            message += f"\n{time} - CPU is at {value}%, which is over 85%"
+        elif key == "ram":
+            message += f"\n{time} - RAM is at {value}%, which is over 90%"
+        elif key == "disk":
+            for volume in value:
+                message += f"\n{time} - Disk {volume['name']} usage is {volume['percent']}%, which is over 70%"
+        elif key == "network_in":
+            message += f"\n{time} - Network in errors are appearing ({value} errors)"
+        elif key == "network_out":
+            message += f"\n{time} - Network out errors are appearing ({value} errors)"
 
     tw = Client(config['twilio_account_id'], config['twilio_auth_token'])
 
