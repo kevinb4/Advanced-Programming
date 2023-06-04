@@ -176,7 +176,7 @@ def handle_email_report(config):
 
     smtp.login(config['username'], config['password'])
 
-    message = """From: """ + str(config['from_email']) + """
+    message = """"From: """ + str(config['from_email']) + """
 Subject: System Monitoring Report
 
     CPU Usage:
